@@ -3,13 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>LINE的なもの</title>
-<<<<<<< HEAD
-    <!--
-=======
->>>>>>> 58e250933987d2a0fbe915a88590b2eadcad84fc
     <script src="https://cdn.mlkcca.com/v0.6.0/milkcocoa.js"></script>
     <script src="js/chat.jp"></script>
+    <link rel="stylesheet" type="text/css" href="css/messe.css">
+<!--
     <style media="screen">
+
       ul > li:first-child{
         color: black;
         font-size: 25px;
@@ -20,21 +19,44 @@
       ul > li:nth-child(2n):before{
         content: "ユーザー名"
       }
+
     </style>
-<<<<<<< HEAD
-  -->
-=======
->>>>>>> 58e250933987d2a0fbe915a88590b2eadcad84fc
+-->
   </head>
   <body>
-  <div>
-    <p>ユーザー名</p>
-<<<<<<< HEAD
-    <textarea name="" id="jis-name" cols="30" row="1">aaa</textarea>
-=======
-    <textarea name="" id="jis-name" cols="30" row="1"></textarea>
->>>>>>> 58e250933987d2a0fbe915a88590b2eadcad84fc
-  </div>
+    <div id="out_line">
+      <div>
+        <p>ユーザー名</p>
+        <div id="time_line">
 
+          <div class="message message_left">
+            <div class="message_box">
+              <div class="message_content">
+                <div class="message_text">
+                  left
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="message message_right">
+            <div class="message_box">
+              <div class="message_content">
+                <div class="message_text">
+                  right
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="clear"></div>
+
+        </div>
+        <div class="send_field">
+          <textarea name="" id="text_box" cols="30" row="1">aaa</textarea><!--テキスト入力部分-->
+          <button name="button" id="send_button">送信</button><!--送信ボタン-->
+        </div>
+      </div>
+    </div>
   </body>
 </html>
