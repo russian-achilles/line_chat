@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>LINE的なもの</title>
     <script src="https://cdn.mlkcca.com/v0.6.0/milkcocoa.js"></script>
-    <script src="js/chat.jp"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/chat.js"></script>
     <link rel="stylesheet" type="text/css" href="css/messe.css">
 <!--
     <style media="screen">
@@ -22,6 +23,65 @@
 
     </style>
 -->
+<script>
+  $(function(){
+    var milkcocoa = new MilkCocoa("yieldjiag7jt5.mlkcca.com");//インスタンスの作成
+    var ds = milkcocoa.dataStore("message");//messageデータストアの作成
+
+    //messageデータストアからメッセージを受け取る
+    ds.stream().sort("desc").next(function(error,datas){
+      datas.forEach(function(data){
+        renderMessage(data);
+      });
+    });
+
+    //messageデータストアへのプッシュを監視
+    ds.on("push",function(e){
+      renderMessage(e);
+    });
+
+    var last_message = "dummy";
+
+    function renderMessage(message) {
+      var message_html = '<p class="post-tex">' + escapeHTML(message.value.content) + '</p>';
+      var data_html = '';
+      if(message.value.data){
+        data_html = '<p class="post-date">'+escapeHTML( new Date(message.value.date).toLocaleString())+'</p>';
+      }
+      $("#"+last_message).before('<div id="'+message.id+'" class="post">' + message_html + data_html + '</div>');
+      last_message= message.id;
+    }
+
+    function post(){//messageデータストアにメッセージをプッシュ
+      var content = escapeHTML($('#text_box').val());
+      if(content && content !=""){
+        ds.push({
+          title: "タイトル",
+          content: content,
+          data: new Date().getTime()
+        }, function(e){});
+      }
+      $('#text_box').val("");
+    }
+
+    $('#send_button').click(function(){
+      alert("moving");
+      post();//送信ボタンが押された時の処理
+    })
+    $('#text_box').keydown(function(e){
+      if(e.which == 13){
+        post();
+        return false;
+      }
+    });
+  });
+
+  //インジェクション対策
+  function escapeHTML(val){
+    return $('<div>').text(val).html();
+  };
+
+</script>
   </head>
   <body>
     <div id="out_line">
@@ -54,7 +114,7 @@
         </div>
         <div class="send_field">
           <textarea name="" id="text_box" cols="30" row="1" placeholder="Aa"></textarea><!--テキスト入力部分-->
-          <button name="button" id="send_button">送信</button><!--送信ボタン-->
+          <button name="button" id="send_button" type="submit">送信</button><!--送信ボタン-->
         </div>
       </div>
     </div>
