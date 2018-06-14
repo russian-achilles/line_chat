@@ -8,6 +8,8 @@ body{
   overflow: scroll;
 }*/
 
+
+
 #out_line{/*全体部*/
   height: 100%;
   width: auto;
@@ -21,7 +23,7 @@ body{
   height: 100%;
   border-right: 1px solid #ddd;
   border-left: 1px solid #ccc;
-  height: calc(100% - 48px);
+  height:  calc(100% - 48px);
 
   overflow: scroll;
 }

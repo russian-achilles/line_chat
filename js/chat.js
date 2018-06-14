@@ -26,25 +26,34 @@ $(function(){
   var last_message = "dummy";
 
   function renderMessage(message) {
-    var message_html = '<p class="post-tex">' + escapeHTML(message.value.content) + '</p>';
+    var message_html = escapeHTML(message.value.content);
     var data_html = '';
-    if(message.value.data){
-      data_html = '<p class="post-date">'+escapeHTML( new Date(message.value.date).toLocaleString())+'</p>';
+    //console.log(message.value.to);
+    //console.log($('.to').text());
+    if((message.value.to == $('#to').text())&&(message.value.from == $('#from').text())){
+      /*$("#"+last_message).before('<div id="'+message.id+'" class="post">' + message_html + data_html + '</div>');*/
+      $('.clear').before(
+        '<div class="message message_right"><div class="message_box"><div class="message_content"><div class="message_text">'
+        + message_html +
+        '</div></div></div></div>'
+      )
     }
-    /*$("#"+last_message).before('<div id="'+message.id+'" class="post">' + message_html + data_html + '</div>');*/
-    $('.clear').before(
-      '<div class="message message_left"><div class="message_box"><div class="message_content"><div class="message_text">'
-      + message_html +
-      '</div></div></div></div>'
-    )
+    else if (message.value.to==$('#from').text() && message.value.from==$('#to').text()) {
+      $('.clear').before(
+        '<div class="message message_left"><div class="message_box"><div class="message_content"><div class="message_text">'
+        + message_html +
+        '</div></div></div></div>'
+      )
+    }
     last_message= message.id;
   }
 
   function post(){//messageデータストアにメッセージをプッシュ
     var content = escapeHTML($('#text_box').val());
-    if(content && content !=""){
+    if(content && content !=""){//テキストが入力されている
       ds.push({
-        name: "名前",
+        to: $('#to').text(),
+        from: $('#from').text(),
         content: content,
         data: new Date().getTime()
       }, function(e){});
