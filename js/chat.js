@@ -1,6 +1,14 @@
 $(function(){
   var milkcocoa = new MilkCocoa("yieldjiag7jt5.mlkcca.com");//インスタンスの作成
   var ds = milkcocoa.dataStore("message");//messageデータストアの作成
+  $(function(){
+    $('#time_line').before(
+      '<p id="to">'+'お友達：'+window.sessionStorage.getItem('friend_name')+'</p>'
+    )
+    $('#time_line').before(
+      '<p id="from">'+'あなた：'+window.sessionStorage.getItem('user_name')+'</p>'
+    )
+  })
 
   /*$(document).ready(function () {
 	  hsize = $(window).height();
@@ -62,7 +70,7 @@ $(function(){
   }
 
   $('#send_button').click(function(){
-    alert("moving");
+    //alert("moving");
     post();//送信ボタンが押された時の処理
   })
   $('#text_box').keydown(function(e){
