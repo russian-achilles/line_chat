@@ -35,7 +35,7 @@ $(function(){
     user_name = escapeHTML($('#login_name').val());
     user_id = escapeHTML($('#login_id').val());
     name_ds.get(user_id,function(err, datum){
-      alert("checked")
+      //alert("checked")
       if(datum){
         //alert("このIDは既に使われています")
         //console.log(datum);

@@ -1,6 +1,8 @@
 $(function(){
   var milkcocoa = new MilkCocoa("yieldjiag7jt5.mlkcca.com");//インスタンスの作成
   var ds = milkcocoa.dataStore("message");//messageデータストアの作成
+  var to = window.sessionStorage.getItem('friend_id');
+  var from = window.sessionStorage.getItem('user_id');
   $(function(){
     $('#time_line').before(
       '<p id="to">'+'お友達：'+window.sessionStorage.getItem('friend_name')+'</p>'
@@ -38,7 +40,7 @@ $(function(){
     var data_html = '';
     //console.log(message.value.to);
     //console.log($('.to').text());
-    if((message.value.to == $('#to').text())&&(message.value.from == $('#from').text())){
+    if((message.value.to == to)&&(message.value.from == from)){
       /*$("#"+last_message).before('<div id="'+message.id+'" class="post">' + message_html + data_html + '</div>');*/
       $('.clear').before(
         '<div class="message message_right"><div class="message_box"><div class="message_content"><div class="message_text">'
@@ -46,7 +48,7 @@ $(function(){
         '</div></div></div></div>'
       )
     }
-    else if (message.value.to==$('#from').text() && message.value.from==$('#to').text()) {
+    else if (message.value.to==from && message.value.from==to) {
       $('.clear').before(
         '<div class="message message_left"><div class="message_box"><div class="message_content"><div class="message_text">'
         + message_html +
@@ -60,8 +62,8 @@ $(function(){
     var content = escapeHTML($('#text_box').val());
     if(content && content !=""){//テキストが入力されている
       ds.push({
-        to: $('#to').text(),
-        from: $('#from').text(),
+        to: to,
+        from: from,
         content: content,
         data: new Date().getTime()
       }, function(e){});
