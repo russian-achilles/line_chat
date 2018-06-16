@@ -16,7 +16,7 @@ $(function(){
 
 
   //messageデータストアからメッセージを受け取る
-  ds.stream().sort("desc").next(function(error,datas){
+  ds.stream().sort("desc").next(function(err,datas){
     datas.forEach(function(data){
       renderMessage(data);
     });
@@ -57,7 +57,7 @@ $(function(){
         to: to,
         from: from,
         content: content,
-        data: new Date().getTime()
+        date: new Date().getTime()
       }, function(e){});
     }
     $('#text_box').val("");
