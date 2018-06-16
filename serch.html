@@ -8,7 +8,17 @@
     <title>検索画面的なもの</title>
   </head>
   <body>
-    <table style="margin: auto">
+    <script type="text/javascript">//直リンクしたと考えられる場合の処理
+      user_id = window.sessionStorage.getItem('user_id');
+      milkcocoa = new MilkCocoa("yieldjiag7jt5.mlkcca.com");
+      name_ds = milkcocoa.dataStore("namelist");
+      name_ds.get(user_id,function(err, datum){
+        if(err){
+          location.href="login.html";
+        }
+      })
+    </script>
+    <table style="margin: auto">
       <tr>
         <th>お友達のID</th>
         <th>
@@ -17,7 +27,7 @@
       </tr>
     </table>
     <div style="text-align: center">
-      <button type="submit" id="serch_button">serch</button>
+      <button type="submit" id="serch_button">serch</button>
     </div>
   </body>
 </html>

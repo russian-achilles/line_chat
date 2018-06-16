@@ -1,19 +1,19 @@
 $(function(){
   var milkcocoa = new MilkCocoa("yieldjiag7jt5.mlkcca.com");//インスタンスの作成
-  var name_ds = milkcocoa.dataStore("namelist");//名前管理用のデータベース作成
+  var name_ds = milkcocoa.dataStore("namelist");//名前管理用のデータストア作成
   function regist(){//ユーザー名とIDを保持
     user_name = escapeHTML($('#user_name').val());
     user_id = escapeHTML($('#user_id').val());
     if(user_id==""){
-      alert("IDが空欄です")
+      alert("IDが空欄です");
     }
     else{
       name_ds.get(user_id,function(err, datum){
         if(datum){//データベースからIDを検索
-          alert("このIDは既に使われています")
+          alert("このIDは既に使われています");
         }
         else {
-          name_ds.set(user_id,{'name':user_name});
+          name_ds.set(user_id,{'name':user_name, 'friends_num':0});
           window.sessionStorage.setItem("user_id",user_id);
           window.sessionStorage.setItem("user_name",user_name);
           alert("登録されました")
@@ -26,7 +26,7 @@ $(function(){
   function login_user(){
     user_name = escapeHTML($('#login_name').val());//ユーザー名とIDを保持
     user_id = escapeHTML($('#login_id').val());
-    name_ds.get(user_id,function(err, datum){//データベースからIDを検索
+    name_ds.get(user_id,function(err, datum){//データストアからIDを検索
       if(datum){
         if(datum.value.name==user_name){//ユーザー名が一致することの確認
           window.sessionStorage.setItem("user_id",user_id);
@@ -45,14 +45,27 @@ $(function(){
   }
   function serch_user(){
     friend_id = escapeHTML($('#friend_id').val());//入力されたIDを保持
-    user_name=window.sessionStorage.getItem('user_name')
-    user_id=window.sessionStorage.getItem('user_id')
-    name_ds.get(friend_id,function(err,datum){//IDをデータベースから検索
+    user_name=window.sessionStorage.getItem('user_name');
+    user_id=window.sessionStorage.getItem('user_id');
+    name_ds.get(friend_id,function(err,datum){//IDをデータストアから検索
       if(datum){//IDが登録ずみである場合の処理
         if(friend_id != user_id){//自信のIDではないかの確認
           alert("ユーザーが見つかりました");
           window.sessionStorage.setItem("friend_id",friend_id);
           window.sessionStorage.setItem("friend_name",datum.value.name);
+          /*friend_num = datum.value.friends_num + 1;
+          new_friend = 'friend' + friend_num;
+          alert("stop1");
+          name_ds.set(friend_id,{'friends_num':friend_num, new_friend:user_id});
+          name_ds.get(user_id,function(err,datum){
+            if(datum){
+              alert("stop2");
+              user_num = datum.value.friends_num + 1;
+              new_friend = 'friend' + num;
+              alert("stop3");
+              name_ds.set(user_id,{'friends_num':user_num, new_friend:friend_id});
+            }
+          })*/
           window.location.href = "index.html";
         }
         else{
@@ -60,7 +73,7 @@ $(function(){
         }
       }
       else {
-        alert("お友達が見つかりません")
+        alert("お友達が見つかりません");
       }
     })
   }

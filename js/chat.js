@@ -3,6 +3,7 @@ $(function(){
   var ds = milkcocoa.dataStore("message");//messageデータストアの作成
   var to = window.sessionStorage.getItem('friend_id');
   var from = window.sessionStorage.getItem('user_id');
+
   $(function(){
     $('#time_line').before(//友達と自分の名前を表示
       '<p id="to">'+'お友達：'+window.sessionStorage.getItem('friend_name')+'</p>'
@@ -23,7 +24,7 @@ $(function(){
 
   //messageデータストアへのプッシュを監視
   ds.on("push",function(e){
-    renderMessage(e);//データベースへのプッシュが確認されると受信
+    renderMessage(e);//データストアへのプッシュが確認されると受信
   });
 
 
