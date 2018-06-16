@@ -13,11 +13,15 @@ body{
 #to{
   text-align: center;
   width: 100%;
+  height: 5%;
+  margin: 0;
 }
 
 #from{
   text-align: right;
   width: 100%;
+  height: 5%;
+  margin: 0;
 }
 
 #out_line{/*全体部*/
@@ -32,7 +36,7 @@ body{
 #time_line{/*タイムライン部*/
   overflow: auto;
   box-sizing: border-box;
-  height: calc(100% - 48px);
+  height: 80%;
   background-color: pink;
   /*border-right: 1px solid #ddd;
   border-left: 1px solid #ccc;*/
@@ -96,14 +100,14 @@ body{
   border-right: 1px solid #ddd;
   border-left: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  height: 48px;
+  height: 8%;
   /*width: 100%;*/
-  padding: 4px;
+  padding: 0.5%;
   bottom: 48px
 }
 
 #text_box{
-  width: calc(100% - 75px);
+  width: 80%;
   line-height: 16px;
   height: 100%;
   padding: 14px 6px 0px 6px;
@@ -114,7 +118,7 @@ body{
   box-sizing: border-box;
 }
 #send_button{
-  width: 72px;
+  width: 20%;
   height: 100%;
   font-size: 16px;
   line-height: 3em;

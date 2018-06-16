@@ -4,7 +4,7 @@ $(function(){
   var to = window.sessionStorage.getItem('friend_id');
   var from = window.sessionStorage.getItem('user_id');
   $(function(){
-    $('#time_line').before(
+    $('#time_line').before(//友達と自分の名前を表示
       '<p id="to">'+'お友達：'+window.sessionStorage.getItem('friend_name')+'</p>'
     )
     $('#time_line').before(
@@ -12,14 +12,7 @@ $(function(){
     )
   })
 
-  /*$(document).ready(function () {
-	  hsize = $(window).height();
-	  $("body").css("height", hsize + "px");
-	});
-	$(window).resize(function () {
-	  hsize = $(window).height();
-	  $("body").css("height", hsize + "px");
-	});*/
+
 
   //messageデータストアからメッセージを受け取る
   ds.stream().sort("desc").next(function(error,datas){
@@ -30,18 +23,17 @@ $(function(){
 
   //messageデータストアへのプッシュを監視
   ds.on("push",function(e){
-    renderMessage(e);
+    renderMessage(e);//データベースへのプッシュが確認されると受信
   });
 
-  var last_message = "dummy";
 
   function renderMessage(message) {
     var message_html = escapeHTML(message.value.content);
     var data_html = '';
     //console.log(message.value.to);
     //console.log($('.to').text());
+    //送信元と送信先の確認
     if((message.value.to == to)&&(message.value.from == from)){
-      /*$("#"+last_message).before('<div id="'+message.id+'" class="post">' + message_html + data_html + '</div>');*/
       $('.clear').before(
         '<div class="message message_right"><div class="message_box"><div class="message_content"><div class="message_text">'
         + message_html +
@@ -55,7 +47,6 @@ $(function(){
         '</div></div></div></div>'
       )
     }
-    last_message= message.id;
   }
 
   function post(){//messageデータストアにメッセージをプッシュ
